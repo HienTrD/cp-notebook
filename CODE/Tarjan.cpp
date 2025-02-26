@@ -13,6 +13,7 @@ const int mxN = 1e5 + 5;
  * Vì khi đó mỗi cạnh sẽ chỉ được đi đúng 1 lần (hay có thể hiểu là nếu một cạnh u - v thì ta chỉ xét 1 chiều duy nhất 1 là u -> v 2 là u <- v chứ không xét cùng lúc cả 2 chiều).
  * Việc cài danh sách cạnh đảm bảo định hình được chiều của cạnh.
  * Code được tham khảo từ: GSPVHCUTE
+ * Link nộp thử: https://marisaoj.com/problem/245
  */
 
 int N, M;
