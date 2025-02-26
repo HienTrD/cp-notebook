@@ -21,7 +21,7 @@ vector<int> adj[mxN]; // Mảng lưu danh sách cạnh nếu adj[u] có cạnh i
 int num[mxN]; // Tarjan
 int low[mxN]; // Tarjan
 bitset<mxN> used; // Đánh dấu cạnh đã sử dụng
-int child[mxN]; // Đếm số lượng con (nếu số lượng con = 1 => đỉnh đó là đỉnh lá không thể là khớp)
+int child[mxN]; // Đếm số lượng con (nếu số lượng con <= 1 => đỉnh đó là đỉnh lá không thể là khớp)
 bitset<mxN> bridge; // Đánh dấu cạnh id là cầu
 bitset<mxN> joint; // Đánh dấu đỉnh u là khớp
 int cnt_joint = 0, cnt_bridge = 0; // Đếm khớp, cầu
