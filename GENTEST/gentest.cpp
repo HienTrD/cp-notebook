@@ -2,14 +2,14 @@
 using namespace std;
 
 /// Macro
-#define  						fi  first 
-#define 					  se  second
-#define            int  long long
-#define  				ALL(x)  (x).begin(), (x).end()
-#define  				BIT(x)  (1LL << (x))
-#define  		MASK(x, i)  (((x) >> (i)) & 1)
-#define     FORE(i, v)  for(__typeof((v).begin()) i = (v).begin(); i != (v).end(); ++ i)
-#define   FOR(i, a, b)  for(int i = (a), _b = (b); i <= _b; ++ i)
+#define  fi  first 
+#define  se  second
+#define  int  long long
+#define  ALL(x)  (x).begin(), (x).end()
+#define  BIT(x)  (1LL << (x))
+#define  MASK(x, i)  (((x) >> (i)) & 1)
+#define  FORE(i, v)  for(__typeof((v).begin()) i = (v).begin(); i != (v).end(); ++ i)
+#define  FOR(i, a, b)  for(int i = (a), _b = (b); i <= _b; ++ i)
 #define  FORD(i, b, a)  for(int i = (b), _a = (a); i >= _a; -- i)
 
 /// Number of tests
