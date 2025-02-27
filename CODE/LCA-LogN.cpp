@@ -60,13 +60,13 @@ int main(void){
     adj[v].push_back(u);
   }
 
-  high[0] = -1;
   dfs(1);
   for(int j = 1; j <= LOG; ++ j){
     for(int i = 1; i <= N; ++ i){
       par[i][j] = par[par[i][j - 1]][j - 1];
     }
   }
+  high[0] = -1;
 
   while(Q --){
     int u, v;
