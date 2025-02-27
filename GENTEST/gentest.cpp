@@ -1,143 +1,144 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-/// Macro
-#define  fi  first 
-#define  se  second
+// Macro
 #define  int  long long
 #define  ALL(x)  (x).begin(), (x).end()
 #define  FORE(i, v)  for(__typeof((v).begin()) i = (v).begin(); i != (v).end(); ++ i)
 #define  FOR(i, a, b)  for(int i = (a), _b = (b); i <= _b; ++ i)
 #define  FORD(i, b, a)  for(int i = (b), _a = (a); i >= _a; -- i)
 
-/// Number of tests
-const int NTEST = 1000;
+// Number of tests
+const int NTEST = 100;
 
-/// Name of two files
+// Name of two files
 const string NAME = "code";
 
-/// Generate random number according to computer clock
+// Generate random number according to computer clock
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-/// Random number in range [L, R]
+// Random number in range [L, R]
 int randInt(int L, int R){
   assert(L <= R);
   return uniform_int_distribution<int>(L, R)(rng);
 }
 
-/// Randomly shuffle a vector 
-template<class T>
-  void shuf(vector<T> &v){
-    shuffle(ALL(v), rng);
+// Random shuffle vector v
+template<class T> void shuf(vector<T> &v){
+  shuffle(ALL(v), rng);
+}
+
+// Generate permutation in [1, N] from index [1, N]
+// 0 at index 0
+vector<int> gen_perm(int N){
+  vector<int> perm;
+  FOR(i, 1, N){
+    perm.push_back(i);
   }
-
-/// Generate random permutation of [1, N]
-/// *To make sure the permutation always in [1, N] from index [1, N]. We will put 0 at the index 0.
-vector<int> random_perm_gen(int N){
-  vector<int> v;
-  FOR(i, 1, N) v.push_back(i);
-  shuf(v);
-  v.insert(v.begin(), 0);
-  return v;
+  shuf(perm);
+  perm.insert(perm.begin(), 0);
+  return perm;
 }
 
-/// Generate vector with all entries in [L, R]
-vector<int> random_vector_gen(int N, int L, int R){
-  vector<int> v;
-  FOR(i, 1, N) v.push_back(randInt(L, R));
-  return v;
-}
-
-/// Random graph
-/// Generate permutation + randomize edge
-void gentest_graph(vector<pair<int, int>> &edge, vector<int> perm){
+// Shuffle edge
+void shuf_edge(vector<pair<int, int>> &edge, int N){
+  vector<int> perm = gen_perm(N);
   FORE(i, edge){
     i->first = perm[i->first];
     i->second = perm[i->second];
-    if(rng() & 1) swap(i->first, i->second);
+    if(rng() & 1) swap(i->first, i->second);    
   }
 }
 
-/// Random DAG
-/// Generate permutation + Topo sort + randomly pick edges between two random verticles
-vector<pair<int, int>> gentest_dag(int N, int M, vector<int> perm){
-  vector<pair<int, int>> edge;
-  int cnt = 0;
-  while(cnt < M){
-    FOR(i, 1, N - 1){
-      if(cnt >= M) break;
-      FOR(j, i + 1, N){
-        if(cnt >= M) break;
-        else if(rng() & 1) edge.push_back(make_pair(perm[i], perm[j])), ++ cnt;
+// Generate normal graph
+namespace gen_graph{
+  vector<pair<int, int>> gentest(int N, int M){
+    // Generate random graph maybe have multiple components
+    vector<pair<int, int>> edge;
+    set<pair<int, int>> st;
+    vector<int> perm = gen_perm(N);
+    while((int)edge.size() < M){
+      int l = randInt(1, N);
+      int r = randInt(1, N);
+      // Don't have self edge and every edge appear one time only
+      if(l == r || st.count(make_pair(min(l, r), max(l, r))) != 0){
+        continue;
+      }
+      if(rng() & 1){
+        edge.push_back(make_pair(l, r));
+        st.insert(make_pair(min(l, r), max(l, r)));
       }
     }
+    shuf_edge(edge, N);
+    return edge;
   }
-  FOR(i, 1, N){
-    int l = randInt(0, M - 1);
-    int r = randInt(0, M - 1);
-    if(rng() & 1) swap(edge[l], edge[r]);
-  }
-  return edge;
-}
+};
 
-/// Random Tree
-/// Generate permutation + DSU
-namespace gentest_tree{
+// Generate tree
+namespace gen_tree{
   struct DisjointSetUnion{
     vector<int> sz;
     vector<int> par;
     int N;
-
+  
     DisjointSetUnion(int sizes){
       N = sizes;
       sz.assign(N + 1, 1);
       par.assign(N + 1, -1);
     }
-
+  
     int root(int u){
-      return par[u] < 0 ? u : par[u] = root(par[u]);
+      if(par[u] < 0){
+        return u;
+      }
+      else{
+        par[u] = root(par[u]);
+        return par[u];
+      }
     }
-
+  
     bool merge(int u, int v){
       u = root(u);
       v = root(v);
-      if(u == v) return false;
-      if(sz[v] > sz[u]) swap(u, v);
+      if(u == v){
+        return false;
+      }
+      if(sz[v] > sz[u]){
+        swap(u, v);
+      }
       sz[u] += sz[v];
       par[v] = u;
       return true;
     }
   };
 
-  vector<pair<int, int>> gentest(int N){
-    DisjointSetUnion dsu(N);
-    vector<int> perm;
+  vector<pair<int, int>> gentest(bool types, int N){
     vector<pair<int, int>> edge;
-    FOR(i, 2, N) perm.push_back(i);
-    perm.insert(perm.begin(), 1);
-    perm.insert(perm.begin(), 0);
-    int cnt = 0;
-    while(cnt < N - 1){
-      FOR(i, 1, N){
-        int u = perm[i];
-        int v = perm[randInt(i + 1, N)];
+    // Generate random tree
+    if(types == true){
+      DisjointSetUnion dsu(N);
+      vector<int> perm = gen_perm(N);
+      while((int)edge.size() < N - 1){
+        int u = perm[randInt(1, N)];
+        int v = perm[randInt(1, N)];
         if(dsu.merge(u, v) == true){
-          ++ cnt;
           edge.push_back(make_pair(u, v));
         }
-        if(cnt == N - 1) break;
       }
     }
-    FOR(i, 1, N){
-      int l = randInt(0, N - 2);
-      int r = randInt(0, N - 2);
-      if(rng() & 1) swap(edge[l], edge[r]);
+    // Generate line tree
+    else{
+      vector<int> perm = gen_perm(N);
+      FOR(i, 1, N - 1){
+        edge.push_back(make_pair(perm[i], perm[i + 1]));
+      }
     }
+    shuf_edge(edge, N);
     return edge;
   }
 };
 
-/// Main gentest generator 
+// Main gentest generator 
 void gentest(void){
   ofstream out((NAME + ".inp").c_str());
 
