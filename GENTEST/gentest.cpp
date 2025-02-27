@@ -6,8 +6,6 @@ using namespace std;
 #define  se  second
 #define  int  long long
 #define  ALL(x)  (x).begin(), (x).end()
-#define  BIT(x)  (1LL << (x))
-#define  MASK(x, i)  (((x) >> (i)) & 1)
 #define  FORE(i, v)  for(__typeof((v).begin()) i = (v).begin(); i != (v).end(); ++ i)
 #define  FOR(i, a, b)  for(int i = (a), _b = (b); i <= _b; ++ i)
 #define  FORD(i, b, a)  for(int i = (b), _a = (a); i >= _a; -- i)
@@ -61,7 +59,7 @@ void gentest_graph(vector<pair<int, int>> &edge, vector<int> perm){
 }
 
 /// Random DAG
-/// Generate permutation + Topo sort
+/// Generate permutation + Topo sort + randomly pick edges between two random verticles
 vector<pair<int, int>> gentest_dag(int N, int M, vector<int> perm){
   vector<pair<int, int>> edge;
   int cnt = 0;
@@ -70,7 +68,7 @@ vector<pair<int, int>> gentest_dag(int N, int M, vector<int> perm){
       if(cnt >= M) break;
       FOR(j, i + 1, N){
         if(cnt >= M) break;
-        else if(rng() & (int)(1e9 + 7)) edge.push_back(make_pair(perm[i], perm[j])), ++ cnt;
+        else if(rng() & 1) edge.push_back(make_pair(perm[i], perm[j])), ++ cnt;
       }
     }
   }
@@ -88,8 +86,13 @@ namespace gentest_tree{
   struct DisjointSetUnion{
     vector<int> sz;
     vector<int> par;
+    int N;
 
-    DisjointSetUnion(int sizes) : sz(sizes + 1, 1), par(sizes + 1, -1){};
+    DisjointSetUnion(int sizes){
+      N = sizes;
+      sz.assign(N + 1, 1);
+      par.assign(N + 1, -1);
+    }
 
     int root(int u){
       return par[u] < 0 ? u : par[u] = root(par[u]);
@@ -144,6 +147,7 @@ void gentest(void){
 }
 
 signed main(void){
+  // Don't forget this!!!
   srand(time(nullptr));
 
   FOR(i, 1, NTEST){
@@ -156,5 +160,6 @@ signed main(void){
     }
     cout << "Testcase " << i << ": Accepted!!!" << endl;
   }
+  
   return 0;
 }
