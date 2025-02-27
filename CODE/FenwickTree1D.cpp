@@ -7,14 +7,14 @@ using namespace std;
  */
 
 struct FenwickTree{
-  vector<long long> bit_1;
-  vector<long long> bit_2;
+  vector<long long> bitNul;
+  vector<long long> bitAdd;
   int N;
 
   FenwickTree(int sizes){
     N = sizes;
-    bit_1.assign(N + 1, 0);
-    bit_2.assign(N + 1, 0);
+    bitMul.assign(N + 1, 0);
+    bitAdd.assign(N + 1, 0);
   }
 
   void update(vector<long long> &ft, int x, long long val){
@@ -32,14 +32,14 @@ struct FenwickTree{
   }
 
   void updateLazy(int l, int r, long long val){
-    update(bit_1, l, 1LL * (N - l + 1) * val);
-    update(bit_1, r + 1, 1LL * -(N - r) * val);
-    update(bit_2, l, val);
-    update(bit_2, r + 1, -val);
+    update(bitAdd, l, -val * (l - 1));
+    update(bitAdd, r + 1, val * r);
+    update(bitMul, l, val);
+    update(bitMul, r + 1, -val);
   }
 
   long long getPrefixSum(int x){
-    return get(bit_1, x) - 1LL * get(bit_2, x) * (N - x);
+    return get(bitMul, x) * x + get(bitAdd, x);
   }
 
   long long getRange(int l, int r){
