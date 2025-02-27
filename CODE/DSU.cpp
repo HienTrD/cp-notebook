@@ -20,14 +20,24 @@ struct DisjointSetUnion{
   }
 
   int root(int u){
-    return (par[u] < 0 ? u : par[u] = root(par[u]));
+    if(par[u] < 0){
+      return u;
+    }
+    else{
+      par[u] = root(par[u]);
+      return par[u];
+    }
   }
 
   bool merge(int u, int v){
     u = root(u);
     v = root(v);
-    if(u == v) return false;
-    if(sz[v] > sz[u]) swap(u, v);
+    if(u == v){ // Chung một thành phần liên thông không cần nối lại
+      return false;
+    }
+    if(sz[v] > sz[u]){
+      swap(u, v);
+    }
     sz[u] += sz[v];
     par[v] = u;
     return true;
