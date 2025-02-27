@@ -3,6 +3,7 @@ using namespace std;
 
 /**
  * Link: https://marisaoj.com/problem/191
+ * Code được tham khảo từ: GSPVHCUTE
  */
 
 const int mxN = 1e5 + 5;
