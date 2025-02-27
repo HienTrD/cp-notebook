@@ -6,6 +6,11 @@ using namespace std;
  * Code được tham khảo từ: GSPVHCUTE
  */
 
+const int mxN = 1e5 + 5;
+
+int N, Q;
+long long A[mxN];
+
 struct FenwickTree{
   vector<long long> bitMul;
   vector<long long> bitAdd;
@@ -32,10 +37,10 @@ struct FenwickTree{
   }
 
   void updateLazy(int l, int r, long long val){
-    update(bitAdd, l, -val * (l - 1));
-    update(bitAdd, r + 1, val * r);
     update(bitMul, l, val);
     update(bitMul, r + 1, -val);
+    update(bitAdd, l, -val * (l - 1));
+    update(bitAdd, r + 1, val * r);
   }
 
   long long getPrefixSum(int x){
@@ -46,11 +51,6 @@ struct FenwickTree{
     return getPrefixSum(r) - getPrefixSum(l - 1);
   }
 };
-
-const int mxN = 1e5 + 5;
-
-int N, Q;
-long long A[mxN];
 
 int main(void){
   ios::sync_with_stdio(false);
