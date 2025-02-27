@@ -13,7 +13,8 @@ struct Edge{
   long long w;
 };
 
-// 
+// Hàm viết tay để so sánh các phần tử trong min heap (priority_queue)
+// Vì mặc định của min heap là từ lớn đến bé nên hàm so sánh phải đảo ngược dấu lại để cho cạnh có trọng số nhỏ nhất được lên đầu
 struct cmp{
   bool operator() (const pair<int, long long> &a, const pair<int, long long> &b){
     return a.second > b.second;
@@ -22,8 +23,9 @@ struct cmp{
 
 int N, M;
 vector<Edge> adj[mxN];
-int trace[mxN];
+int trace[mxN]; // Truy vết đường đi
 
+// Hàm trả về một vector chứa khoảng cách gần nhất đến N - 1 đỉnh còn lại
 vector<long long> dijkstra(int st){
   vector<long long> dist(N + 1, 1e18);
   priority_queue<pair<int, long long>, vector<pair<int, long long>>, cmp> Q;
@@ -32,7 +34,10 @@ vector<long long> dijkstra(int st){
   while(Q.empty() == false){
     pair<int, long long> cur = Q.top();
     Q.pop();
-    if(dist[cur.first] != cur.second){
+    // Dijkstra mang tính chất gần giống với BFS nhưng trên đồ thị có trọng số
+    // Là nếu như đỉnh u hiện đang được xét đến thì chắc chắn đường đi từ điểm bắt đầu (st) đến u là tối ưu hóa nhất có thể
+    if(dist[cur.first] != cur.second){ // Vì một đỉnh có thể được tối ưu hóa nhiều lần nên đỉnh u có thể xuất hiện trong min heap nhiều hơn một cái do đó chúng ta cần phải kiếm tra xem liệu hiện tại thì u đang xét
+      // có phải là đỉnh đã được tối ưu hóa hoàn toàn hay không
       continue;
     }
     for(Edge next : adj[cur.first]){
