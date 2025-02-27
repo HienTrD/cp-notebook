@@ -7,7 +7,7 @@ using namespace std;
  */
 
 struct FenwickTree{
-  vector<long long> bitNul;
+  vector<long long> bitMul;
   vector<long long> bitAdd;
   int N;
 
