@@ -83,7 +83,7 @@ struct SegmentTree{
   }
 
   long long querry(int id, int l, int r, int a, int b){
-    if(b < l || r < a || b < a || r < l) return 0;
+    if(b < l || r < a || a > b || l > r) return 0;
     if(a <= l && r <= b) return st[id].val;
 
     down(id, l, r);
