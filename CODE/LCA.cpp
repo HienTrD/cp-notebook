@@ -11,8 +11,8 @@ const int LOG = 19;
 
 int N, Q;
 vector<int> adj[mxN];
-int high[mxN];
-int par[mxN][LOG + 1];
+int high[mxN]; // Độ cao đỉnh đang xét
+int par[mxN][LOG + 1]; // i là đỉnh đang xét còn j là tổ tiên thứ 2^j của đỉnh i
 
 void dfs(int u){
   for(int v : adj[u]){
@@ -62,6 +62,8 @@ int main(void){
   }
 
   dfs(1);
+  // Ở đây sau khi biết được tổ tiên bước 2^0 = 1 bước của đỉnh i thì chúng ta bắt đầu tính tiếp tổ tiên của i nhưng bước 2^j bước
+  // Chúng ta có công thức quy hoạch động: 2^j = 2^(j - 1) + 2^(j - 1) hay để tính được tổ tiên của đỉnh i nhưng bước 2 bước thì ta bước lên 2^(1 - 1) = 1 bước rồi bước thêm 2^(1 - 1) = 1 bước nữa
   for(int j = 1; j <= LOG; ++ j){
     for(int i = 1; i <= N; ++ i){
       par[i][j] = par[par[i][j - 1]][j - 1];
