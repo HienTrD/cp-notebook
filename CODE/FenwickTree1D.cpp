@@ -3,6 +3,7 @@ using namespace std;
 
 /**
  * Link: https://marisaoj.com/problem/201
+ * Code được tham khảo từ: GSPVHCUTE
  */
 
 struct FenwickTree{
