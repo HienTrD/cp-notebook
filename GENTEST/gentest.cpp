@@ -144,7 +144,7 @@ void gentest(void){
 }
 
 signed main(void){
-    srand(time(nullptr));
+  srand(time(nullptr));
 
   FOR(i, 1, NTEST){
     gentest();
