@@ -23,14 +23,14 @@ struct FenwickTree{
   }
 
   void update(vector<long long> &ft, int x, long long val){
-    for(; x <= N; x += x & -x){
+    for(; x <= N; x += (x & (-x))){
       ft[x] += val;
     }
   }
 
   long long get(vector<long long> &ft, int x){
     long long res = 0;
-    for(; x >= 1; x -= x & -x){
+    for(; x >= 1; x -= (x & (-x))){
       res += ft[x];
     }
     return res;
