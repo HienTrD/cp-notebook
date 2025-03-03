@@ -6,6 +6,9 @@ const int mxN = 1e5 + 5;
 /**
  * Link: https://marisaoj.com/problem/245
  * Code được tham khảo từ: GSPVHCUTE
+ * 
+ * Phân tích độ phức tạp thời gian: O(E + V)
+ * 
  * Đối với riêng Tarjan cho cầu khớp sẽ có 2 trường hợp đặc biệt cần lưu ý có thể khiến thuật toán VNOI sai:
  * 1. Đồ thị có nhiều thành phần liên thông.
  * 2. Đồ thị có đúng 2 đỉnh và 1 cạnh.
