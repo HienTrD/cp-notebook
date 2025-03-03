@@ -2,8 +2,10 @@
 using namespace std;
 
 /**
- * Link: ...
+ * Link: 
  * Code được tham khảo từ: ...
+ * 
+ * Phân tích độ phức tạp thời gian: O(E + V)
  */
 
 const int mxN = 1e5 + 5;
