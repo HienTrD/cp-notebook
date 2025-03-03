@@ -4,6 +4,10 @@ using namespace std;
 /**
  * Link: https://marisaoj.com/problem/201
  * Code được tham khảo từ: GSPVHCUTE
+ * 
+ * Phân tích độ phức tạp thời gian:
+ * Update (có hoặc không có lazy): O(log N)
+ * Tính kết quả: O(log N)
  */
 
 const int mxN = 1e5 + 5;
