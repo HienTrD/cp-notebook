@@ -5,6 +5,8 @@ using namespace std;
  * Link: https://marisaoj.com/problem/515
  * Code được tham khảo từ: Yugihacker
  * 
+ * Phân tích độ phức tạp thời gian: O(log_2(N)).
+ * 
  * Giải thích sơ về cách hoạt động của hàm tìm kiếm nhị phân bên dưới:
  * - Đầu tiên khác với cách TKNP của VNOI hàm bên dưới sẽ CHỈ TRẢ LẠI KẾT QUẢ KHI TÌM KIẾM HẾT 2 BIÊN [L, R]
  * - Hai cận HI và LO sẽ dừng khi chia mảng thành 2 phần riêng biệt là [1, lo] và [hi, N]. 
