@@ -4,6 +4,11 @@ using namespace std;
 /**
  * Link: https://marisaoj.com/problem/191
  * Code được tham khảo từ: GSPVHCUTE
+ * 
+ * Phân tích độ phức tạp thời gian:
+ * - DFS: O(E + V)
+ * - Tính LCA: O(log E)
+ * - Truy vấn LCA: O(log E)
  */
 
 const int mxN = 1e5 + 5;
