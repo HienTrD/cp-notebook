@@ -3,6 +3,12 @@ using namespace std;
 
 /**
  * Link: https://marisaoj.com/problem/237
+ * Code được tham khảo từ: GSPVHCUTE
+ * 
+ * Phân tích độ phức tạp thời gian: O(N * K).
+ * Trong đó N là độ dài mỗi xâu tối đa
+ * Trong đó K là số lượng xâu tối đa
+ * 
  * Bài này vì lí do Trie ăn quá nhiều bộ nhớ trong MarisaOJ chỉ chấp nhận 256MB nên chúng ta phải dùng cấu trúc mảng động để tạo cây
  * Ngược lại nếu như trong mọi trường hợp có thể (số lượng node của cây tối đa 10^6) thì chúng ta nên sử dụng mảng cứng để tiết kiệm thời gian
  * Vì hàm new trong C++ chạy rất chậm (nếu là cây có rất nhiều node thì thời gian chạy có thể gấp 3-4 lần dùng mảng cứng)
