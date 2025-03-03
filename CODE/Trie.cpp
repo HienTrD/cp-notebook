@@ -14,7 +14,6 @@ using namespace std;
  * Vì hàm new trong C++ chạy rất chậm (nếu là cây có rất nhiều node thì thời gian chạy có thể gấp 3-4 lần dùng mảng cứng)
  * Vì Trie là cấu trúc dữ liệu chạy bằng con trỏ nên nó ăn rất nhiều bộ nhớ + thời gian chạy (mỗi con trỏ là 8 bytes)
  * Khi sử dụng mảng cứng có thể bỏ command của những lệnh ở trong cây Trie ở dưới và chuyển thành command cho những lệnh còn lại với tên y chang
- * Code được tham khảo từ: GSPVHCUTE
  */
 
 const int ALPHABET = 26;
