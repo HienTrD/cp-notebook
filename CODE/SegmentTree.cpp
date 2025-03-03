@@ -4,6 +4,12 @@ using namespace std;
 /**
  * Link: https://marisaoj.com/problem/203
  * Code được tham khảo từ: GSPVHCUTE
+ * 
+ * Phân tích độ phức tạp thời gian:
+ * - Chuẩn bị cây: O(N log N)
+ * - Update lazy: O(log N)
+ * - Truy vấn: O(log N)
+ * 
  * Giải thích về sự khác nhau của update lazy và update điểm
  * Mảng lazy[id] trong bài được tượng trưng cho nếu như node đó lazy[id] != 0 chứng tỏ nếu bài toán là tổng đoạn thì chắc chắn toàn bộ những node con của node id hiện đang xét cũng tăng 
  * Một lượng giá trị là lazy[id] do đó val[id] của node hiện đang xét sẽ tăng một lượng (r - l + 1) * lazy[id]
