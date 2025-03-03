@@ -4,6 +4,8 @@ using namespace std;
 /**
  * Link: https://marisaoj.com/problem/174
  * Code được tham khảo từ: 
+ * 
+ * Phân tích độ phức tạp thời gian: O(E + VlogV)
  */
 
 const int mxN = 2e5 + 5;
