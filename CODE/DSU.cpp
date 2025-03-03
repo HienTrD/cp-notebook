@@ -4,6 +4,8 @@ using namespace std;
 /**
  * Link: https://marisaoj.com/problem/130
  * Code được tham khảo từ: ...
+ * 
+ * Phân tích độ phức tạp thời gian: O(log log N).
  */
 
 int N, Q;
