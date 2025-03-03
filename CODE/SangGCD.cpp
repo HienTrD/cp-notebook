@@ -11,6 +11,7 @@ using namespace std;
  * 
  * => Tổng độ phức tạp thời gian: N + N/2 + N/3 + ... + 1 = O(N ln N)
  * *Lưu ý: Vì sử dụng vector nên thời gian thực tế chậm gấp 2 lần và bộ nhớ nhiều hơn 4 lần.
+ * Nên nếu chỉ lưu SỐ LƯỢNG ƯỚC THÌ ĐỔI THÀNH INT và chỉ cần mỗi lần uoc[j] += 1 là được.
  */
 
 const int mxN = 1e6 + 5;
